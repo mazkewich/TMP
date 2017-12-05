@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "708421828205",
+    "firebase_url": "https://photomapandroid.firebaseio.com",
+    "project_id": "photomapandroid",
+    "storage_bucket": "photomapandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708421828205:android:a6ae054d4a90c6d8",
+        "android_client_info": {
+          "package_name": "photomap.com.richard.photomap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708421828205-0heqb7ukge3t7pf2228s3pgtht1vjb39.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "photomap.com.richard.photomap",
+            "certificate_hash": "5904e98b1752948cde166e98ea68b68b2999bc4f"
+          }
+        },
+        {
+          "client_id": "708421828205-oakld4ajk87ni1a0np6o17ft7sdmg755.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEPVR_pFCPzBLVS_tNRArhi9f867GYgcQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708421828205-oakld4ajk87ni1a0np6o17ft7sdmg755.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

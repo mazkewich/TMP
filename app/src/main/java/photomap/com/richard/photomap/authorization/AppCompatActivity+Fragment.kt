@@ -4,10 +4,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import photomap.com.richard.photomap.R
 
-/**
- * Created by richard on 12/5/17.
- */
-
 fun AppCompatActivity.addFragment(fragment: Fragment, containerID: Int) {
     val transaction = supportFragmentManager.beginTransaction()
     transaction.add(containerID, fragment)
