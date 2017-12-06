@@ -1,4 +1,4 @@
-package photomap.com.richard.photomap.authorization.Fragments
+package photomap.com.richard.photomap.authorization.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -57,11 +57,17 @@ class SignUpFragment : Fragment(), View.OnClickListener {
 
         when (p0.id){
             signInButton.id -> mListener?.back()
-            signUpButton.id -> mListener?.signUp()
+            signUpButton.id -> signUpAction()
             else -> {
-                Log.d("Photo Map", "Other button was clicked")
+                Log.w("Photo Map", "Other button was clicked")
             }
         }
+    }
+
+    private fun signUpAction() {
+        val email = emailEditText.text.toString()
+        val password = passwordEditText.text.toString()
+        mListener?.signUp(email, password)
     }
 
     /**
@@ -75,7 +81,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
      */
     interface OnSignUpFragmentListener {
         fun back()
-        fun signUp()
+        fun signUp(email: String, password: String)
     }
 
     companion object {

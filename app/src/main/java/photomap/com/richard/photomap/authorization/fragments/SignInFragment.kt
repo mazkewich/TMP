@@ -1,12 +1,15 @@
-package photomap.com.richard.photomap.authorization.Fragments
+package photomap.com.richard.photomap.authorization.fragments
 
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 import photomap.com.richard.photomap.R
@@ -56,12 +59,18 @@ class SignInFragment : Fragment(), View.OnClickListener {
         }
 
         when (p0.id) {
-            signInButton.id -> mListener?.signIn()
+            signInButton.id -> signInAction()
             signUpButton.id -> mListener?.showSignUpFragment()
             else -> {
-                Log.d("Photo Map", "Other button was clicked")
+                Log.w("Photo Map", "Other button was clicked")
             }
         }
+    }
+
+    private fun signInAction() {
+        val email = emailEditText.text.toString()
+        val password = passwordEditText.text.toString()
+        mListener?.signIn(email, password)
     }
 
     /**
@@ -75,7 +84,7 @@ class SignInFragment : Fragment(), View.OnClickListener {
      */
     interface OnSignInFragmentListener {
         fun showSignUpFragment()
-        fun signIn()
+        fun signIn(email: String, password: String)
     }
 
     companion object {
