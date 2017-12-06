@@ -3,15 +3,14 @@ package photomap.com.richard.photomap.authorization.fragments
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.TextUtils
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import kotlinx.android.synthetic.main.fragment_sign_in.*
-
 import photomap.com.richard.photomap.R
 
 /**
@@ -22,7 +21,7 @@ import photomap.com.richard.photomap.R
  * Use the [SignInFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SignInFragment : Fragment(), View.OnClickListener {
+class SignInFragment : Fragment(), View.OnClickListener, Animation.AnimationListener {
 
     private var mListener: OnSignInFragmentListener? = null
 
@@ -53,6 +52,8 @@ class SignInFragment : Fragment(), View.OnClickListener {
         mListener = null
     }
 
+    // Click handling
+
     override fun onClick(p0: View?) {
         if (p0 == null) {
             return
@@ -71,6 +72,25 @@ class SignInFragment : Fragment(), View.OnClickListener {
         val email = emailEditText.text.toString()
         val password = passwordEditText.text.toString()
         mListener?.signIn(email, password)
+    }
+
+    // Animation handling
+
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation {
+        val animationID = if (enter) R.anim.enter_from_left else R.anim.exit_to_left
+        val animation = AnimationUtils.loadAnimation(activity, animationID)
+        animation.setAnimationListener(this)
+        return animation
+    }
+
+    override fun onAnimationRepeat(p0: Animation?) {}
+
+    override fun onAnimationStart(p0: Animation?) {
+        activity.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    }
+
+    override fun onAnimationEnd(p0: Animation?) {
+        activity.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
 
     /**

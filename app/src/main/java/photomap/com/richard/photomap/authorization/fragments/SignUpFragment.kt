@@ -7,6 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 import photomap.com.richard.photomap.R
@@ -19,7 +22,7 @@ import photomap.com.richard.photomap.R
  * Use the [SignUpFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SignUpFragment : Fragment(), View.OnClickListener {
+class SignUpFragment : Fragment(), View.OnClickListener, Animation.AnimationListener {
 
     private var mListener: OnSignUpFragmentListener? = null
 
@@ -69,6 +72,26 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         val password = passwordEditText.text.toString()
         mListener?.signUp(email, password)
     }
+
+    // Animation handling
+
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation {
+        val animationID = if (enter) R.anim.enter_from_right else R.anim.exit_to_right
+        val animation = AnimationUtils.loadAnimation(activity, animationID)
+        animation.setAnimationListener(this)
+        return animation
+    }
+
+    override fun onAnimationRepeat(p0: Animation?) {}
+
+    override fun onAnimationStart(p0: Animation?) {
+        activity.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    }
+
+    override fun onAnimationEnd(p0: Animation?) {
+        activity.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
