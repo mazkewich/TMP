@@ -7,19 +7,19 @@ import android.util.Patterns
 import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
 import photomap.com.richard.photomap.R
 import photomap.com.richard.photomap.authorization.fragments.SignInFragment
 import photomap.com.richard.photomap.authorization.fragments.SignUpFragment
 import photomap.com.richard.photomap.authorization.utils.addFragment
 import photomap.com.richard.photomap.authorization.utils.replaceFragment
+import photomap.com.richard.photomap.services.AuthorizationService
 
 class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragmentListener, SignUpFragment.OnSignUpFragmentListener {
 
     private lateinit var signUpFragment: SignUpFragment
     private lateinit var signInFragment: SignInFragment
 
-    private lateinit var auth: FirebaseAuth
+    private val authorizationService = AuthorizationService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +28,7 @@ class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragme
         configureSignInFragment()
         configureSignUpFragment()
 
-        auth = FirebaseAuth.getInstance()
         addFragment(signInFragment, R.id.fragmentContainer)
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        val currentUser = auth.currentUser
-        Log.d("Photo Map", currentUser.toString())
     }
 
     private fun configureSignInFragment() {
@@ -56,7 +48,8 @@ class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragme
             showValidateToast(email, password)
             return
         }
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+
+        authorizationService.signIn(email, password).addOnCompleteListener {
             task: Task<AuthResult> ->
             if (task.isSuccessful) {
                 Log.d("Photo Map", "signInWithEmail:success")
@@ -76,7 +69,8 @@ class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragme
             showValidateToast(email, password)
             return
         }
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+
+        authorizationService.signUp(email, password).addOnCompleteListener {
             task: Task<AuthResult> ->
             if (task.isSuccessful) {
                 Log.d("Photo Map", "createUserWithEmail:success")
