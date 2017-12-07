@@ -1,4 +1,4 @@
-package photomap.com.richard.photomap.authorization.activities
+package photomap.com.richard.photomap.presentation.authorization.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,10 +8,10 @@ import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import photomap.com.richard.photomap.R
-import photomap.com.richard.photomap.authorization.fragments.SignInFragment
-import photomap.com.richard.photomap.authorization.fragments.SignUpFragment
-import photomap.com.richard.photomap.authorization.utils.addFragment
-import photomap.com.richard.photomap.authorization.utils.replaceFragment
+import photomap.com.richard.photomap.presentation.authorization.fragments.SignInFragment
+import photomap.com.richard.photomap.presentation.authorization.fragments.SignUpFragment
+import photomap.com.richard.photomap.presentation.authorization.utils.addFragment
+import photomap.com.richard.photomap.presentation.authorization.utils.replaceFragment
 import photomap.com.richard.photomap.services.AuthorizationService
 
 class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragmentListener, SignUpFragment.OnSignUpFragmentListener {

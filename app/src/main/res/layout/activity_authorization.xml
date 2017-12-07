@@ -9,6 +9,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/authorizationBackground"
-    tools:context="photomap.com.richard.photomap.authorization.activities.AuthorizationActivity">
+    tools:context=".presentation.authorization.activities.AuthorizationActivity">
 </FrameLayout>
 </android.support.constraint.ConstraintLayout>

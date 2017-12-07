@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="photomap.com.richard.photomap.authorization.fragments.SignUpFragment">
+    tools:context=".presentation.authorization.fragments.SignUpFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
