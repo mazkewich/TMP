@@ -1,10 +1,12 @@
 package photomap.com.richard.photomap.presentation.authorization.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import photomap.com.richard.photomap.R
@@ -12,6 +14,7 @@ import photomap.com.richard.photomap.presentation.authorization.fragments.SignIn
 import photomap.com.richard.photomap.presentation.authorization.fragments.SignUpFragment
 import photomap.com.richard.photomap.presentation.authorization.utils.addFragment
 import photomap.com.richard.photomap.presentation.authorization.utils.replaceFragment
+import photomap.com.richard.photomap.presentation.tabHolder.TabHolderActivity
 import photomap.com.richard.photomap.services.AuthorizationService
 
 class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragmentListener, SignUpFragment.OnSignUpFragmentListener {
@@ -49,15 +52,24 @@ class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragme
             return
         }
 
+        val progressDialog = MaterialDialog.Builder(this).title("Sign In..").progress(true, 0).show()
         authorizationService.signIn(email, password).addOnCompleteListener {
             task: Task<AuthResult> ->
             if (task.isSuccessful) {
                 Log.d("Photo Map", "signInWithEmail:success")
+                progressDialog.hide()
+                showTabHolder()
             } else {
                 Log.w("Photo Map", "signInWithEmail:failure", task.exception)
                 showFailedToast()
             }
         }
+    }
+
+    private fun showTabHolder() {
+        val holderIntent = Intent(this, TabHolderActivity::class.java)
+        startActivity(holderIntent)
+        finish()
     }
 
     override fun back() {
@@ -70,10 +82,13 @@ class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragme
             return
         }
 
+        val progressDialog = MaterialDialog.Builder(this).title("Sign UP..").progress(true, 0).show()
         authorizationService.signUp(email, password).addOnCompleteListener {
             task: Task<AuthResult> ->
+            progressDialog.hide()
             if (task.isSuccessful) {
                 Log.d("Photo Map", "createUserWithEmail:success")
+                signUpFragment.cleanTextEdit()
                 back()
             } else {
                 Log.w("Photo Map", "createUserWithEmail:failure", task.exception)

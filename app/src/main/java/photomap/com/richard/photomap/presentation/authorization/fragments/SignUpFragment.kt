@@ -35,10 +35,8 @@ class SignUpFragment : Fragment(), View.OnClickListener, Animation.AnimationList
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_sign_up, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -73,6 +71,11 @@ class SignUpFragment : Fragment(), View.OnClickListener, Animation.AnimationList
         mListener?.signUp(email, password)
     }
 
+    fun cleanTextEdit() {
+        emailEditText.text.clear()
+        passwordEditText.text.clear()
+    }
+
     // Animation handling
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation {
@@ -85,11 +88,15 @@ class SignUpFragment : Fragment(), View.OnClickListener, Animation.AnimationList
     override fun onAnimationRepeat(p0: Animation?) {}
 
     override fun onAnimationStart(p0: Animation?) {
-        activity.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        activity?.let {
+            it.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
     }
 
     override fun onAnimationEnd(p0: Animation?) {
-        activity.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        activity?.let {
+            it.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
     }
 
 
