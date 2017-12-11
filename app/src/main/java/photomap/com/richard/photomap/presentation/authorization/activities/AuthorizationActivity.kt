@@ -74,6 +74,7 @@ class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragme
             task: Task<AuthResult> ->
             if (task.isSuccessful) {
                 Log.d("Photo Map", "createUserWithEmail:success")
+                back()
             } else {
                 Log.w("Photo Map", "createUserWithEmail:failure", task.exception)
                 showFailedToast()

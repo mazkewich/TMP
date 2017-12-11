@@ -9,16 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="photomap.com.richard.photomap.presentation.authorization.activities.AuthorizationActivity">
+        <activity android:name=".presentation.authorization.activities.AuthorizationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="photomap.com.richard.photomap.presentation.splash.SplashActivity">
-
-        </activity>
+        <activity android:name=".presentation.splash.SplashActivity"></activity>
+        <activity
+            android:name=".presentation.tabHolder.TabHolderActivity"
+            android:label="@string/title_activity_tab_holder"></activity>
     </application>
 
 </manifest>
