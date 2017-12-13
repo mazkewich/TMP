@@ -55,7 +55,7 @@ class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragme
         val progressDialog = MaterialDialog.Builder(this).title("Sign In..").progress(true, 0).show()
         authorizationService.signIn(email, password).addOnCompleteListener {
             task: Task<AuthResult> ->
-            progressDialog.hide()
+            progressDialog.dismiss()
             if (task.isSuccessful) {
                 Log.d("Photo Map", "signInWithEmail:success")
                 showTabHolder()
@@ -85,7 +85,7 @@ class AuthorizationActivity : AppCompatActivity(), SignInFragment.OnSignInFragme
         val progressDialog = MaterialDialog.Builder(this).title("Sign UP..").progress(true, 0).show()
         authorizationService.signUp(email, password).addOnCompleteListener {
             task: Task<AuthResult> ->
-            progressDialog.hide()
+            progressDialog.dismiss()
             if (task.isSuccessful) {
                 Log.d("Photo Map", "createUserWithEmail:success")
                 signUpFragment.cleanTextEdit()
