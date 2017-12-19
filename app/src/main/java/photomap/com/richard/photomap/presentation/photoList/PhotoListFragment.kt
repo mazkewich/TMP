@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import kotlinx.android.synthetic.main.fragment_photo_list.*
 
 import photomap.com.richard.photomap.R
 
@@ -28,7 +30,6 @@ class PhotoListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_photo_list, container, false)
     }
 
@@ -39,6 +40,15 @@ class PhotoListFragment : Fragment() {
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val menuItems = listOf("Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item")
+
+        val listViewAdapter = PhotoListAdapter(view.context, menuItems)
+        photoListView.adapter = listViewAdapter
     }
 
     override fun onDetach() {

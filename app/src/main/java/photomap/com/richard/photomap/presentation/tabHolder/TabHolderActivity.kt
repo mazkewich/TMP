@@ -27,6 +27,7 @@ class TabHolderActivity : AppCompatActivity(), MapFragment.OnMapFragmentListener
                 return@OnNavigationItemSelectedListener true
             }
         }
+
         false
     }
 
