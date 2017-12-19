@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import photomap.com.richard.photomap.R
 
@@ -12,19 +13,16 @@ import photomap.com.richard.photomap.R
  * Created by rychardmatskevich on 12/19/17.
  */
 
-class PhotoListAdapter(context: Context, items: List<String>) : BaseAdapter() {
+class PhotoListAdapter(context: Context, private var items: List<String>) : BaseAdapter() {
 
-    private var items: List<String> = items
     private var inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val rowView = convertView ?: inflater.inflate(R.layout.photo_item, parent, false)
+        val rowHolder = PhotoListRowHolder(rowView)
 
-        val titleTextView = rowView.findViewById<TextView>(R.id.titleTextView)
-        titleTextView.text = items[position]
-
-        val dateTextView = rowView.findViewById<TextView>(R.id.dateTextView)
-        dateTextView.text = items[position]
+        rowHolder.titleLabel.text = items[position]
+        rowHolder.dateLabel.text = items[position]
 
         return rowView
     }
@@ -39,6 +37,12 @@ class PhotoListAdapter(context: Context, items: List<String>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return items.size
+    }
+
+    private class PhotoListRowHolder(row: View) {
+        val titleLabel: TextView = row.findViewById<TextView>(R.id.titleTextView)
+        val dateLabel: TextView = row.findViewById<TextView>(R.id.dateTextView)
+        val imageView: ImageView = row.findViewById<ImageView>(R.id.photoImageView)
     }
 
 }

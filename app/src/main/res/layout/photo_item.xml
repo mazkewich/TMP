@@ -6,7 +6,7 @@
     android:layout_height="50dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/photoImageView"
         android:layout_width="60dp"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
@@ -27,7 +27,7 @@
         android:layout_marginStart="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/photoImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
