@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.fragment_photo_list.*
 
 import photomap.com.richard.photomap.R
+import photomap.com.richard.photomap.core.PhotoItem
 import photomap.com.richard.photomap.presentation.photo.PhotoActivity
 
 /**
@@ -48,9 +49,10 @@ class PhotoListFragment : Fragment(), AdapterView.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val menuItems = listOf("Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item", "Item")
+        val imageName = ""
+        val photoItems = (0..8).map { PhotoItem("item$it", "DateItem$it", imageName) }
 
-        val listViewAdapter = PhotoListAdapter(view.context, menuItems)
+        val listViewAdapter = PhotoListAdapter(view.context, photoItems)
         photoListView.adapter = listViewAdapter
         photoListView.onItemClickListener = this
     }

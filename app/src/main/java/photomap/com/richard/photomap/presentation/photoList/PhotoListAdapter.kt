@@ -8,12 +8,13 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import photomap.com.richard.photomap.R
+import photomap.com.richard.photomap.core.PhotoItem
 
 /**
  * Created by rychardmatskevich on 12/19/17.
  */
 
-class PhotoListAdapter(context: Context, private var items: List<String>) : BaseAdapter() {
+class PhotoListAdapter(context: Context, private var items: List<PhotoItem>) : BaseAdapter() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -21,8 +22,8 @@ class PhotoListAdapter(context: Context, private var items: List<String>) : Base
         val rowView = convertView ?: inflater.inflate(R.layout.photo_item, parent, false)
         val rowHolder = PhotoListRowHolder(rowView)
 
-        rowHolder.titleLabel.text = items[position]
-        rowHolder.dateLabel.text = items[position]
+        rowHolder.titleLabel.text = items[position].title
+        rowHolder.dateLabel.text = items[position].description
 
         return rowView
     }
