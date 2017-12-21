@@ -5,4 +5,5 @@
     <color name="colorAccent">#ff4081</color>
     <color name="authorizationBackground">#87B3FF</color>
     <color name="authorizationView">#60FFFFFF</color>
+    <color name="colorPhotoDetailsView">#23ffffff</color>
 </resources>

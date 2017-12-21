@@ -1,16 +1,19 @@
 package photomap.com.richard.photomap.presentation.photoList
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.fragment_photo_list.*
 
 import photomap.com.richard.photomap.R
+import photomap.com.richard.photomap.presentation.photo.PhotoActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -20,7 +23,7 @@ import photomap.com.richard.photomap.R
  * Use the [PhotoListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PhotoListFragment : Fragment() {
+class PhotoListFragment : Fragment(), AdapterView.OnItemClickListener {
 
     private var mListener: OnPhotoListFragmentListener? = null
 
@@ -49,11 +52,17 @@ class PhotoListFragment : Fragment() {
 
         val listViewAdapter = PhotoListAdapter(view.context, menuItems)
         photoListView.adapter = listViewAdapter
+        photoListView.onItemClickListener = this
     }
 
     override fun onDetach() {
         super.onDetach()
         mListener = null
+    }
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val photoIntent = Intent(activity, PhotoActivity::class.java)
+        startActivity(photoIntent)
     }
 
     /**

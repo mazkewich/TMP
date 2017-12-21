@@ -77,7 +77,7 @@
             android:layout_marginTop="5dp"
             android:elevation="0dp"
             android:fontFamily="monospace"
-            android:text="@string/back"
+            android:text="@string/title_back"
             android:textSize="15sp"
             android:textStyle="bold" />
 
