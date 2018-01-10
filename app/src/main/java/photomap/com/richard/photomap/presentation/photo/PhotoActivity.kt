@@ -17,6 +17,8 @@ class PhotoActivity : AppCompatActivity(), View.OnClickListener {
 
         titleTextView.text = photoItem.title
         dateTextView.text = photoItem.description
+        photo_view.setImageResource(R.drawable.ic_1920_1200_201008100955062320111)
+        photo_view.setOnClickListener(this)
 
         backButton.setOnClickListener(this)
     }
@@ -25,6 +27,10 @@ class PhotoActivity : AppCompatActivity(), View.OnClickListener {
         p0?.let {
             when (it.id) {
                 backButton.id -> finish()
+                photo_view.id -> {
+                    topView.visibility = if (topView.isShown) View.GONE else View.VISIBLE
+                    bottomView.visibility = if (bottomView.isShown) View.GONE else View.VISIBLE
+                }
             }
         }
     }

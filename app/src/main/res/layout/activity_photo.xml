@@ -6,28 +6,13 @@
     android:layout_height="match_parent"
     tools:context="photomap.com.richard.photomap.presentation.photo.PhotoActivity">
 
-    <HorizontalScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/photo_list_image_description"
-                app:srcCompat="@drawable/ic_1920_1200_201008100955062320111" />
-        </ScrollView>
-    </HorizontalScrollView>
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/photo_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/topView"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:background="@color/colorPhotoDetailsView"
@@ -54,6 +39,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/bottomView"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:background="@color/colorPhotoDetailsView"
