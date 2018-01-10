@@ -27,6 +27,7 @@ import photomap.com.richard.photomap.presentation.photo.PhotoActivity
 class PhotoListFragment : Fragment(), AdapterView.OnItemClickListener {
 
     private var mListener: OnPhotoListFragmentListener? = null
+    private val photoItems = (0..8).map { PhotoItem("item$it", "DateItem$it", "") }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +50,6 @@ class PhotoListFragment : Fragment(), AdapterView.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imageName = ""
-        val photoItems = (0..8).map { PhotoItem("item$it", "DateItem$it", imageName) }
-
         val listViewAdapter = PhotoListAdapter(view.context, photoItems)
         photoListView.adapter = listViewAdapter
         photoListView.onItemClickListener = this
@@ -64,6 +62,7 @@ class PhotoListFragment : Fragment(), AdapterView.OnItemClickListener {
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val photoIntent = Intent(activity, PhotoActivity::class.java)
+        photoIntent.putExtra("photoItem", photoItems[position])
         startActivity(photoIntent)
     }
 

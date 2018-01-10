@@ -11,4 +11,5 @@
     <string name="title_photo_list">Photo List</string>
     <string name="title_notifications">Notifications</string>
     <string name="photo_list_image_description">Photo List Image</string>
+    <string name="title">Title</string>
 </resources>
