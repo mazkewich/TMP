@@ -12,4 +12,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="photo_list_image_description">Photo List Image</string>
     <string name="title">Title</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="list_category">Category</string>
+
 </resources>

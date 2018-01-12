@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_photo_list.*
 
 import photomap.com.richard.photomap.R
 import photomap.com.richard.photomap.core.PhotoItem
+import photomap.com.richard.photomap.presentation.category.CategoryActivity
 import photomap.com.richard.photomap.presentation.photo.PhotoActivity
 
 /**
@@ -53,6 +54,9 @@ class PhotoListFragment : Fragment(), AdapterView.OnItemClickListener {
         val listViewAdapter = PhotoListAdapter(view.context, photoItems)
         photoListView.adapter = listViewAdapter
         photoListView.onItemClickListener = this
+        categoryTextView.setOnClickListener {
+            CategoryActivity.start(activity)
+        }
     }
 
     override fun onDetach() {
