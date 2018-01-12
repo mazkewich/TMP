@@ -34,7 +34,6 @@ class TabHolderActivity : AppCompatActivity(), MapFragment.OnMapFragmentListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab_holder)
-
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         supportFragmentManager.beginTransaction().add(R.id.fragmentsContainer, mapFragment).commit()
