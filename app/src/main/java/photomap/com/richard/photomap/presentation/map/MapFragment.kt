@@ -1,42 +1,30 @@
 package photomap.com.richard.photomap.presentation.map
 
 import android.content.Context
-import android.net.Uri
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.fragment_map.*
+import com.google.android.gms.maps.*
 
 import photomap.com.richard.photomap.R
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MapFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [MapFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MapFragment : Fragment() {
+class MapFragment : Fragment(), OnMapReadyCallback {
 
-//    private lateinit var mMap: GoogleMap
-//
-//    override fun onMapReady(googleMap: GoogleMap) {
-//        mMap = googleMap
-//
-//        // Add a marker in Sydney and move the camera
-//        val sydney = LatLng(-34.0, 151.0)
-//        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-//    }
+    private lateinit var mMap: GoogleMap
+    private lateinit var mapView: MapView
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        mMap.uiSettings.isMyLocationButtonEnabled = false
+        if (ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.isMyLocationEnabled = true
+        }
+    }
 
     private var mListener: OnMapFragmentListener? = null
 
@@ -49,19 +37,44 @@ class MapFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        mapView.onResume()
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map, container, false)
+        val v = inflater.inflate(R.layout.fragment_map, container, false)
+
+        mapView = v.findViewById<MapView>(R.id.mapView)
+        mapView.onCreate(savedInstanceState)
+
+        mapView.getMapAsync(this)
+
+        return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        mapView.getMapAsync(this)
     }
 
     override fun onDetach() {
@@ -69,15 +82,6 @@ class MapFragment : Fragment() {
         mListener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
     interface OnMapFragmentListener {
 
     }
