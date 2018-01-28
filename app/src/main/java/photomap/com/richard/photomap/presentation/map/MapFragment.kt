@@ -1,8 +1,10 @@
 package photomap.com.richard.photomap.presentation.map
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.Log
@@ -142,11 +144,29 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Google
 
     override fun onOtherButtonClick(actionSheet: ActionSheet?, index: Int) {
         when (index) {
-            0 -> Log.w("Photo Map", "0")
-            1 -> Log.w("Photo Map", "1")
+            0 -> showCamera()
+            1 -> showGallery()
             else -> {
                 Log.w("Photo Map", "Other button was clicked")
             }
+        }
+    }
+
+    private fun showCamera() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(takePictureIntent, 0)
+    }
+
+    private fun showGallery() {
+        val pickPhotoIntent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(pickPhotoIntent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+
         }
     }
 
