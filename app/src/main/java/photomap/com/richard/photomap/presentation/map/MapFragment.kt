@@ -10,23 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_map.*
 
 import photomap.com.richard.photomap.R
 
-class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
+class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapLongClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var mapView: MapView
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        mMap.uiSettings.isMyLocationButtonEnabled = false
-        if (ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mMap.isMyLocationEnabled = true
-        }
-    }
 
     private var mListener: OnMapFragmentListener? = null
 
@@ -87,6 +79,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         cameraButton.setOnClickListener(this)
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        mListener = null
+    }
+
     override fun onClick(p0: View?) {
         if (p0 == null) {
             return
@@ -115,9 +112,18 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         Log.w("Photo Map", "categoryAction")
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        mListener = null
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        mMap.uiSettings.isMyLocationButtonEnabled = false
+        if (ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.isMyLocationEnabled = true
+        }
+        mMap.setOnMapLongClickListener(this)
+    }
+
+    override fun onMapLongClick(p0: LatLng?) {
+        Log.w("Photo Map", "LONG CLICK")
     }
 
     interface OnMapFragmentListener {
