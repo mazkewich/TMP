@@ -13,7 +13,9 @@
     <string name="photo_list_image_description">Photo List Image</string>
     <string name="title">Title</string>
     <string name="title_activity_maps">Map</string>
-
+    <string name="cancel">Cancel</string>
+    <string name="take_a_picture">Take a picture</string>
+    <string name="choose_from_library">Choose from library</string>
     <string name="list_category">Category</string>
 
 </resources>

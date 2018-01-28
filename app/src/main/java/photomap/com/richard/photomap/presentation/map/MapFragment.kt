@@ -9,18 +9,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.baoyz.actionsheet.ActionSheet
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_map.*
 
 import photomap.com.richard.photomap.R
 
-class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapLongClickListener {
+class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapLongClickListener, ActionSheet.ActionSheetListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var mapView: MapView
 
     private var mListener: OnMapFragmentListener? = null
+
+    private lateinit var actionSheet: ActionSheet.Builder
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -61,8 +64,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Google
 
         mapView = v.findViewById<MapView>(R.id.mapView)
         mapView.onCreate(savedInstanceState)
-
         mapView.getMapAsync(this)
+
+        actionSheet = ActionSheet.createBuilder(activity, activity?.supportFragmentManager)
+                .setCancelButtonTitle(R.string.cancel)
+                .setOtherButtonTitles(getString(R.string.take_a_picture), getString(R.string.choose_from_library))
+                .setCancelableOnTouchOutside(true)
+                .setListener(this)
 
         return v
     }
@@ -105,6 +113,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Google
     }
 
     private fun cameraAction() {
+        actionSheet.show()
         Log.w("Photo Map", "cameraAction")
     }
 
@@ -123,7 +132,22 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Google
     }
 
     override fun onMapLongClick(p0: LatLng?) {
+        actionSheet.show()
         Log.w("Photo Map", "LONG CLICK")
+    }
+
+    override fun onDismiss(actionSheet: ActionSheet?, isCancel: Boolean) {
+
+    }
+
+    override fun onOtherButtonClick(actionSheet: ActionSheet?, index: Int) {
+        when (index) {
+            0 -> Log.w("Photo Map", "0")
+            1 -> Log.w("Photo Map", "1")
+            else -> {
+                Log.w("Photo Map", "Other button was clicked")
+            }
+        }
     }
 
     interface OnMapFragmentListener {
