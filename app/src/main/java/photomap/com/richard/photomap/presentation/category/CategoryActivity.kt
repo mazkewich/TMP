@@ -17,18 +17,20 @@ class CategoryActivity: Activity() {
 
     private val categoryAdapter: CategoryAdapter = CategoryAdapter(DataService.categories)
 
-    companion object {
-        fun start(context: Context?) {
-            val intent = Intent(context, CategoryActivity::class.java)
-            context?.startActivity(intent)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
         recyclerView.adapter = categoryAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter.notifyDataSetChanged()
+    }
+
+    override fun onBackPressed() {
+        val selectedCategories = categoryAdapter.categories.filter { it.selected }
+        val categoriesIntent = Intent()
+        categoriesIntent.putExtra("selectedCategories", selectedCategories.toTypedArray())
+        setResult(RESULT_OK, categoriesIntent)
+
+        super.onBackPressed()
     }
 }

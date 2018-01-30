@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_category.*
  * @author richard on 1/12/18.
  */
 
-class CategoryAdapter(private val categories: List<Category>): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(val categories: List<Category>): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CategoryViewHolder =
             CategoryViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.item_category,parent, false))

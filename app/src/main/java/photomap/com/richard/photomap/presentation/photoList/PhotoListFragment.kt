@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.fragment_photo_list.*
 
 import photomap.com.richard.photomap.R
+import photomap.com.richard.photomap.core.CategoryType
 import photomap.com.richard.photomap.core.PhotoItem
 import photomap.com.richard.photomap.presentation.category.CategoryActivity
 import photomap.com.richard.photomap.presentation.photo.PhotoActivity
@@ -55,7 +57,9 @@ class PhotoListFragment : Fragment(), AdapterView.OnItemClickListener {
         photoListView.adapter = listViewAdapter
         photoListView.onItemClickListener = this
         categoryTextView.setOnClickListener {
-            CategoryActivity.start(activity)
+            val categoryIntent = Intent(activity, CategoryActivity::class.java)
+            categoryIntent.putExtra("categoryType", CategoryType.PHOTO_LIST)
+            startActivityForResult(categoryIntent, 2)
         }
     }
 
@@ -68,6 +72,14 @@ class PhotoListFragment : Fragment(), AdapterView.OnItemClickListener {
         val photoIntent = Intent(activity, PhotoActivity::class.java)
         photoIntent.putExtra("photoItem", photoItems[position])
         startActivity(photoIntent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            2 -> Log.w("Photo Map", "Categories")
+        }
     }
 
     /**

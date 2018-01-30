@@ -17,6 +17,8 @@ import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_map.*
 
 import photomap.com.richard.photomap.R
+import photomap.com.richard.photomap.core.CategoryType
+import photomap.com.richard.photomap.presentation.category.CategoryActivity
 
 class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapLongClickListener, ActionSheet.ActionSheetListener {
 
@@ -116,11 +118,12 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Google
 
     private fun cameraAction() {
         actionSheet.show()
-        Log.w("Photo Map", "cameraAction")
     }
 
     private fun categoryAction() {
-        Log.w("Photo Map", "categoryAction")
+        val categoryIntent = Intent(activity, CategoryActivity::class.java)
+        categoryIntent.putExtra("categoryType", CategoryType.MAP)
+        startActivityForResult(categoryIntent, 2)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -135,7 +138,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Google
 
     override fun onMapLongClick(p0: LatLng?) {
         actionSheet.show()
-        Log.w("Photo Map", "LONG CLICK")
     }
 
     override fun onDismiss(actionSheet: ActionSheet?, isCancel: Boolean) {
@@ -166,7 +168,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Google
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {
-
+            2 -> Log.w("Photo Map", "Categories")
         }
     }
 
